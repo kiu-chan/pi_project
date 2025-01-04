@@ -10,8 +10,20 @@ function App() {
         <Routes>
           {publicRoutes.map((route, index) => {
             const Page = route.component;
-            const Layout = route.layout || DefaultLayout;
+            
+            // Nếu layout là null thì render component trực tiếp
+            if (route.layout === null) {
+              return (
+                <Route
+                  key={index}
+                  path={route.path}
+                  element={<Page />}
+                />
+              );
+            }
 
+            // Ngược lại sử dụng DefaultLayout
+            const Layout = route.layout || DefaultLayout;
             return (
               <Route
                 key={index}
