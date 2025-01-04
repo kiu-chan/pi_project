@@ -126,7 +126,7 @@ function DeleteAccount() {
         <div className="bg-white rounded-lg shadow p-6">
           {/* Header */}
           <h1 className="text-2xl font-bold text-gray-900 mb-6">
-            {step === 1 && 'Yêu cầu xóa tài khoản'}
+            {step === 1 && 'Yêu cầu xóa tài khoản ứng dụng Hà Nội Vibe'}
             {step === 2 && 'Xác nhận email'}
             {step === 3 && 'Yêu cầu đã được ghi nhận'}
           </h1>
