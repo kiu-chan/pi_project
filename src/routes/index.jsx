@@ -2,9 +2,9 @@ import Home from '../pages/Home';
 import DeleteAccount from '../pages/DeleteAccount';
 
 const publicRoutes = [
-    { path: '/', component: Home },
+    // { path: '/', component: Home },
     { 
-        path: '/delete-account', 
+        path: '/', 
         component: DeleteAccount,
         layout: null 
     }
