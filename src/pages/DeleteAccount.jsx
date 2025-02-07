@@ -32,6 +32,7 @@ const EMAILJS_PUBLIC_KEY = "Aj6eAUxZKL1qbBJ34";
 function DeleteAccount() {
   const [step, setStep] = useState(1);
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState(''); // Added phone state
   const [verificationCode, setVerificationCode] = useState('');
   const [reason, setReason] = useState('');
   const [confirmed, setConfirmed] = useState(false);
@@ -46,7 +47,7 @@ function DeleteAccount() {
     const templateParams = {
       to_email: userEmail,
       verification_code: code,
-      from_name: "Hà Nội Vibe",
+      from_name: "Эконом taxi",
     };
 
     try {
@@ -66,7 +67,8 @@ function DeleteAccount() {
     const templateParams = {
       to_email: 'baokhanhntby@gmail.com',
       user_email: email,
-      reason: reason || 'Không có lý do được cung cấp',
+      user_phone: phone,
+      reason: reason || 'No reason provided',
       request_time: new Date().toLocaleString(),
     };
 
@@ -94,7 +96,7 @@ function DeleteAccount() {
       localStorage.setItem('verificationCode', code);
       setStep(2);
     } catch (error) {
-      setError('Có lỗi xảy ra khi gửi mã xác nhận. Vui lòng thử lại sau.');
+      setError('An error occurred while sending the verification code. Please try again later.');
     } finally {
       setIsLoading(false);
     }
@@ -112,10 +114,10 @@ function DeleteAccount() {
         setStep(3);
         localStorage.removeItem('verificationCode');
       } catch (error) {
-        setError('Có lỗi xảy ra khi gửi yêu cầu. Vui lòng thử lại sau.');
+        setError('An error occurred while sending the request. Please try again later.');
       }
     } else {
-      setError('Mã xác nhận không chính xác');
+      setError('Invalid verification code');
     }
     setIsLoading(false);
   };
@@ -126,9 +128,9 @@ function DeleteAccount() {
         <div className="bg-white rounded-lg shadow p-6">
           {/* Header */}
           <h1 className="text-2xl font-bold text-gray-900 mb-6">
-            {step === 1 && 'Yêu cầu xóa tài khoản ứng dụng Hà Nội Vibe'}
-            {step === 2 && 'Xác nhận email'}
-            {step === 3 && 'Yêu cầu đã được ghi nhận'}
+            {step === 1 && 'Request to Delete Эконом taxi Account'}
+            {step === 2 && 'Email Verification'}
+            {step === 3 && 'Request Received'}
           </h1>
 
           {/* Error Message */}
@@ -154,9 +156,9 @@ function DeleteAccount() {
                     <AlertIcon />
                   </div>
                   <div className="ml-3">
-                    <h3 className="text-sm font-medium text-blue-800">Quan trọng</h3>
+                    <h3 className="text-sm font-medium text-blue-800">Important</h3>
                     <p className="text-sm text-blue-700 mt-2">
-                      Hành động này không thể hoàn tác. Tất cả dữ liệu của bạn sẽ bị xóa vĩnh viễn.
+                      This action cannot be undone. All your data will be permanently deleted.
                     </p>
                   </div>
                 </div>
@@ -166,7 +168,7 @@ function DeleteAccount() {
                 <div className="space-y-6">
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                      Địa chỉ Email
+                      Email Address
                     </label>
                     <input
                       type="email"
@@ -179,8 +181,22 @@ function DeleteAccount() {
                   </div>
 
                   <div>
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      required
+                      className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
+                  </div>
+
+                  <div>
                     <label htmlFor="reason" className="block text-sm font-medium text-gray-700">
-                      Lý do xóa tài khoản (Không bắt buộc)
+                      Reason for Account Deletion (Optional)
                     </label>
                     <textarea
                       id="reason"
@@ -201,7 +217,7 @@ function DeleteAccount() {
                       required
                     />
                     <label htmlFor="confirm" className="ml-2 block text-sm text-gray-700">
-                      Tôi hiểu rằng hành động này là vĩnh viễn và không thể hoàn tác
+                      I understand that this action is permanent and cannot be undone
                     </label>
                   </div>
 
@@ -213,7 +229,7 @@ function DeleteAccount() {
                         isLoading || !confirmed ? 'bg-gray-400 cursor-not-allowed' : 'bg-red-600 hover:bg-red-700'
                       } text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2`}
                     >
-                      {isLoading ? 'Đang xử lý...' : 'Gửi yêu cầu xóa tài khoản'}
+                      {isLoading ? 'Processing...' : 'Submit Account Deletion Request'}
                     </button>
                   </div>
                 </div>
@@ -227,7 +243,7 @@ function DeleteAccount() {
               <div className="flex items-center space-x-2 mb-4">
                 <MailIcon />
                 <p className="text-gray-600">
-                  Chúng tôi đã gửi một mã xác nhận đến email của bạn. Vui lòng kiểm tra và nhập mã để tiếp tục.
+                  We have sent a verification code to your email. Please check and enter the code to continue.
                 </p>
               </div>
 
@@ -235,7 +251,7 @@ function DeleteAccount() {
                 <div className="space-y-6">
                   <div>
                     <label htmlFor="verificationCode" className="block text-sm font-medium text-gray-700">
-                      Mã xác nhận
+                      Verification Code
                     </label>
                     <input
                       type="text"
@@ -255,7 +271,7 @@ function DeleteAccount() {
                         isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
                       } text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
                     >
-                      {isLoading ? 'Đang xử lý...' : 'Xác nhận'}
+                      {isLoading ? 'Processing...' : 'Verify'}
                     </button>
                   </div>
                 </div>
@@ -268,11 +284,11 @@ function DeleteAccount() {
             <div className="text-center">
               <div className="flex items-center justify-center space-x-2 mb-4">
                 <ClockIcon />
-                <h2 className="text-xl font-semibold text-gray-900">Yêu cầu đã được ghi nhận</h2>
+                <h2 className="text-xl font-semibold text-gray-900">Request Received</h2>
               </div>
               <p className="text-gray-600">
-                Chúng tôi đã nhận được yêu cầu xóa tài khoản của bạn. Yêu cầu sẽ được xử lý trong vòng 30 ngày.
-                Bạn sẽ nhận được email thông báo khi quá trình xóa tài khoản hoàn tất.
+                We have received your account deletion request. Please check your email for a confirmation of your request. 
+                You will receive another email notification when the account deletion process is complete.
               </p>
             </div>
           )}
