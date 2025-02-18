@@ -128,7 +128,7 @@ function DeleteAccount() {
         <div className="bg-white rounded-lg shadow p-6">
           {/* Header */}
           <h1 className="text-2xl font-bold text-gray-900 mb-6">
-            {step === 1 && 'Request to Delete Эконом taxi Account'}
+            {step === 1 && 'Request to Ba Bể Bigtrees'}
             {step === 2 && 'Email Verification'}
             {step === 3 && 'Request Received'}
           </h1>
@@ -196,7 +196,7 @@ function DeleteAccount() {
 
                   <div>
                     <label htmlFor="reason" className="block text-sm font-medium text-gray-700">
-                      Reason for Account Deletion (Optional)
+                    your question
                     </label>
                     <textarea
                       id="reason"
@@ -229,7 +229,7 @@ function DeleteAccount() {
                         isLoading || !confirmed ? 'bg-gray-400 cursor-not-allowed' : 'bg-red-600 hover:bg-red-700'
                       } text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2`}
                     >
-                      {isLoading ? 'Processing...' : 'Submit Account Deletion Request'}
+                      {isLoading ? 'Processing...' : 'Submit'}
                     </button>
                   </div>
                 </div>
@@ -287,8 +287,7 @@ function DeleteAccount() {
                 <h2 className="text-xl font-semibold text-gray-900">Request Received</h2>
               </div>
               <p className="text-gray-600">
-                We have received your account deletion request. Please check your email for a confirmation of your request. 
-                You will receive another email notification when the account deletion process is complete.
+                We have received request. Please check your email for a confirmation of your request.
               </p>
             </div>
           )}
