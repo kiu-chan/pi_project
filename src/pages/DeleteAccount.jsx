@@ -158,7 +158,7 @@ function DeleteAccount() {
                   <div className="ml-3">
                     <h3 className="text-sm font-medium text-blue-800">Important</h3>
                     <p className="text-sm text-blue-700 mt-2">
-                      This action cannot be undone. All your data will be permanently deleted.
+                      This action cannot be undone.
                     </p>
                   </div>
                 </div>
