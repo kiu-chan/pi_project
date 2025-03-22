@@ -47,7 +47,7 @@ function DeleteAccount() {
     const templateParams = {
       to_email: userEmail,
       verification_code: code,
-      from_name: "Эконом taxi",
+      from_name: "Economy Taxi",
     };
 
     try {
@@ -128,7 +128,7 @@ function DeleteAccount() {
         <div className="bg-white rounded-lg shadow p-6">
           {/* Header */}
           <h1 className="text-2xl font-bold text-gray-900 mb-6">
-            {step === 1 && 'Request to Delete Эконом taxi Account'}
+            {step === 1 && 'Request to Delete Economy Taxi Account'}
             {step === 2 && 'Email Verification'}
             {step === 3 && 'Request Received'}
           </h1>
